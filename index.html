@@ -1,1 +1,181 @@
+<head>
+<title>Square Pocket Note</title>
+</head>
+<!-- 通知 -->
+<div class="notice" id="n1">
+<img src="http://khp.jp/data/tecreveon/img/tecreveon_upld_4.png">　保存が完了しました</div>
 
+<div class="notice" id="n2">
+<img src="http://khp.jp/data/tecreveon/img/tecreveon_upld_4.png">　エクスポートが完了しました</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+<!-- ポップアップ -->
+<input type="checkbox" id="pop-up">
+<div class="overlay">
+	<div class="window">
+		<label class="close" for="pop-up">×</label>
+		<p class="text">
+<h1>ピンを刺す</h1>
+ピンを刺したい位置を入力してください。<br>
+X: <textarea id="get_x" value="1" cols="50" rows="5" maxlength="15"></textarea><br>
+Y: <textarea id="get_y" value="1" cols="50" rows="5" maxlength="15"></textarea>
+<br>
+<br>
+<center>
+<a href="#" onclick="pin_go()" class="button">決定</a>　<a href="#" onclick="pin_no()" class="button">ピンを外す</a>
+</center>
+<br>
+<br>
+※Xは左からが基準、Yは上からが基準です。
+</p>
+	</div>
+</div>
+
+<label class="open" for="pop-up2">Setting</label>
+<input type="checkbox" id="pop-up2">
+<div class="overlay">
+	<div class="window">
+		<label class="close" for="pop-up2">×</label>
+		<p class="text">プロジェクトの設定</p>
+	</div>
+</div>
+
+<input type="checkbox" id="pop-up_cube">
+<div class="overlay">
+	<div class="window_s">
+		<label class="close" for="pop-up_cube" onclick="cl_a()">×</label>
+		<p class="text">
+<span id="cube_e">
+Select Cube
+
+<a href="#" onclick="cube_square()">立方体</a>
+</span>
+</p>
+	</div>
+</div>
+
+<input type="checkbox" id="pop-up_deco">
+<div class="overlay">
+	<div class="window_s">
+		<label class="close" for="pop-up_deco">×</label>
+		<p class="text">Select Decoration</p>
+	</div>
+</div>
+
+<input type="checkbox" id="pop-up_others">
+<div class="overlay">
+	<div class="window_s">
+		<label class="close" for="pop-up_others">×</label>
+		<p class="text">Select others</p>
+	</div>
+</div>
+
+<!-- コーディング画面 -->
+<nav id="g-nav">
+<div id="g-nav-list">
+<ul>
+あ
+<br>
+<textarea id="made" onkeyup="ShowLength(value);">
+</textarea>
+
+<div id="code_menu"><p id="inputlength">0文字</p>　<a href="#" onclick="canvas.innerHTML=''+made.value">わあ</a></div>
+</ul>
+</div>
+</nav>
+</p>
+<blur>
+<!-- 上部メニュー -->
+<div class="menu">
+    <label for="menu_bar01">File</label>
+    <input type="checkbox" id="menu_bar01" class="menu_" />
+    <ul id="links01">
+        <li><label><input type="file" id="import">ファイルインポート
+</label></li>
+        <li><a href="#" onclick="save()">エクスポート</a></li>
+        <li><a href="#" id="buttonSave" onclick="noticego1()">Cookieに保存</a></li>
+        <li><a href="#" onclick="reseti()">リセット</a></li>
+        <li><a href="#" class="openbtn">オプション</a></li>
+    </ul>
+    <label for="menu_bar02">Create</label>
+    <input type="checkbox" id="menu_bar02" class="menu_" />
+    <ul id="links02">
+        <li><label class="open" for="pop-up_cube">キューブ</label></li>
+        <li><label class="open" for="pop-up_deco
+">飾り</label></li>
+　　<li><label class="open" for="pop-up_others">その他</label></li>
+    </ul>
+　<a href="#" class="coding">Code</a>
+　<label for="menu_bar04">Tools</label>
+    <input type="checkbox" id="menu_bar04" class="menu_" />
+    <ul id="links04">
+        <li><a href="#" onClick="OnOff(this);" id="border_on">ボーダーを表示</a></li>
+　　<li><label class="open" for="pop-up">ピンを刺す</label></li>
+         <li><a href="#" id="debug_off" onclick="debug_go(this);">デバック画面</a></li>
+    </ul>
+</div>
+<div id=canvas>
+<img src="http://khp.jp/data/tecreveon/img/tecreveon_upld_6.png" id="pinting">
+<span id="canvas_span">
+Square Pocket Note 0.10 (<span id="sp_version"></span>)<br>
+Coordinate: <span id="b_x"></span> / <span id="b_y"></span><br>
+Chunk: <span id="b_c_x"></span> / <span id="b_c_y"></span><br>
+FPS: <span id="d_fps"></span><br>
+Amount of code: <span id="inputlength">0 letter</span><br><br>
+Code: <span id="d_code"></span><br>
+Browser: <span id="d_browser"></span><br>
+Browser version: <span id="d_b_v"></span><br>
+Platform: <span id="d_pr"></span><br>
+User agent: <span id="d_ue"></span><br>
+Browser language: <span id="d_l"></span><br>
+Display: <span id="d_w"></span>×<span id="d_h"></span><br><br>
+Elapsed time: <span id="timer"></span><br>
+Current time: <span id="b_nt"></span>
+</span>
+</div>
+
+<label class="open" for="pop-up">開く</label>
+<input type="checkbox" id="pop-up">
+<div class="overlay">
+	<div class="window">
+		<label class="close" for="pop-up">×</label>
+		<p class="text"><h1>プログラムコード</h1>
+<br>
+<center>
+<br>
+<br>
+<br>
+<br>
+<a href="#" onclick="canvas.innerHTML=''+made.value">プレビュー</a>
+　<a href="#" id="buttonSave">クッキーに保存</a>
+　<label>
+    <input type="file" id="import">インポート
+</label>
+　<a href="#" onclick="save();">エクスポート</a>
+
+</center>
+
+</p>
+	</div>
+</div>
+</div>
+
+<!-- 座標表示 -->
+<body onload = "animation()">
+<span id="fps_view">
+<span id = "fps"></span> FPS
+</span>
+
+
+<div class="position">
+      <ul>
+        座標 : X:<span id="js-related-pos-x"></span>,  Y:<span id="js-related-pos-y"></span>　チャンク: X: <span id="xchunk"></span>　Y: <span id="ychunk"></span>
+      </ul>
+   </div>
+
+</p>
+</div>
+</nav>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
